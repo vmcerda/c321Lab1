@@ -95,6 +95,7 @@ public class Test {
 		
 		cache1.clearCache();
 		cache2.clearCache();
+		
 	}
 
 	private static void usage(String[] args){;
