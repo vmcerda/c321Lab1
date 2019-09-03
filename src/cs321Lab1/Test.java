@@ -92,6 +92,9 @@ public class Test {
 			System.out.println("The number of 2nd-level cache hits: " + NH2);
 			System.out.println("The 1st-level cache hit ration: \t " + String.format("%.10f", HR2) + "\n");
 		}
+		
+		cache1.clearCache();
+		cache2.clearCache();
 	}
 
 	private static void usage(String[] args){;

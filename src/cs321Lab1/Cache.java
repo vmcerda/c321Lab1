@@ -40,7 +40,7 @@ public class Cache {
 	}
 	
 	public void clearCache() {
-		
+		cache.clear();
 	}
 	public String toString() {
 	    StringBuilder result = new StringBuilder();
