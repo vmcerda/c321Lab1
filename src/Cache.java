@@ -1,5 +1,3 @@
-package cs321Lab1;
-
 import java.util.LinkedList;
 
 public class Cache {

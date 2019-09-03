@@ -1,7 +1,3 @@
-package cs321Lab1;
-
-
-
 import java.io.*;
 import java.util.Scanner;
 
