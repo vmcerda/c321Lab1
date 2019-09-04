@@ -1,39 +1,32 @@
 import java.util.LinkedList;
 
-public class Cache {
-	private LinkedList<Object> cache;
+public class Cache<E> {
+	private LinkedList<E> cache;
 	private int cacheSize;
-
-	
-	
 	
 	public Cache(){
-		this.cache = new LinkedList<Object>();
+		this.cache = new LinkedList<E>();
 
 	}
-	public void setCachSize(int i) {
+	public void setCachSize(int i) {  //pass in as a parameter to constructor
 		cacheSize = i;
 	}
 	
-	public Object getObject(Object data) {
+	public E getObject(E data) {
 		if(cache.contains(data)) {
 			return data;
 		}
 		return null;
-
 	}
 
-	public void addObject(Object data) {
+	public void addObject(E data) {
 		if(cache.size() == cacheSize) {
 			cache.removeLast();
-			cache.addFirst(data);
-		}else {
-			cache.addFirst(data);
 		}
-			
+		cache.addFirst(data);
 	}
 	
-	public void removeObject(Object data) {
+	public void removeObject(E data) {
 		cache.remove(data);
 	}
 	
@@ -42,7 +35,7 @@ public class Cache {
 	}
 	public String toString() {
 	    StringBuilder result = new StringBuilder();
-	    for(Object item:cache) {
+	    for(E item:cache) {
 	        result.append(item.toString());
 	        result.append(" "); //optional
 	    }

@@ -4,22 +4,22 @@ import java.util.Scanner;
 
 public class Test {
 	
-	public static Cache cache1,cache2;
+	public static Cache<String> cache1,cache2;
 	public static String fileName;
 	public static int cache1Size,cache2Size;
 	public static int NH,NH1,NH2,NR,NR1,NR2;
-	public static float HR,HR1,HR2;
-	public static Object hold;
+	public static double HR,HR1,HR2;
+	public static String hold;
 	
 	public static void main(String[] args) throws IOException {
 		//Check arguments//
 		usage(args);
 
-		cache1 = new Cache();	//Create cache tree size(1 or 2)//
+		cache1 = new Cache<>();	//Create cache tree size(1 or 2)//
 		cache1.setCachSize(Integer.parseInt(args[2])) ;	//sets 1st cache size
 		System.out.println("First level cache with " + cache1.length() + " entries has been created");
 		if(args[1].equals("2")) {	//if cache size is 2 add a second cache and file is in index 4//
-			cache2 = new Cache();	
+			cache2 = new Cache<>();
 			cache2.setCachSize(Integer.parseInt(args[3]));
 			fileName = args[4];
 			System.out.println("Second level cache with " + cache2.length() + " entries has been created");
@@ -27,13 +27,12 @@ public class Test {
 			fileName = args[3];		//If a single cache, file is in index 3
 		}
 		
-		Scanner input = new Scanner(new FileReader(fileName));  
+		Scanner input = new Scanner(new FileReader(fileName));
 		while(input.hasNext()) {
-		   Object word = input.next();
+		   String word = input.next();
 //		   System.out.println(word);
-		   NR1++; 
+		   NR1++;
 		   if(cache1.getObject(word) == null) { // if NULL, missed cache1
-			   NR2++;
 //			   System.out.println("Cache1 - " + cache1.toString());
 			   if(cache2 != null) {
 				   NR2++;
@@ -48,6 +47,7 @@ public class Test {
 					   hold = cache2.getObject(word);
 					   cache2.removeObject(hold);
 					   cache2.addObject(hold);
+					   cache1.addObject(hold);
 //					   System.out.println("Cache2 - " + cache1.toString());
 				   }
 			   }
@@ -71,9 +71,9 @@ public class Test {
 		//formulas go here
 		NR = NR1;
 		NH = NH1 + NH2;
-		HR = ((float)NH/(float)NR);
-		HR1 = ((float)NH1/(float)NR);
-		HR2 = ((float)NH2/(float)NR2);
+		HR = ((double)NH/NR);
+		HR1 = ((double)NH1/NR);
+		HR2 = ((double)NH2/NR2);
 		
 		System.out.println("The number of global references: " + NR);
 		System.out.println("The number of global cache hits: " + NH);
