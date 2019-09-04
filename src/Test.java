@@ -14,6 +14,7 @@ public class Test {
 	public static int NH,NH1,NH2,NR,NR1,NR2;
 	public static double HR,HR1,HR2;
 	public static String hold;
+	public static int count = 0;
 	
 	public static void main(String[] args) throws IOException {
 		//Check arguments//
@@ -31,26 +32,25 @@ public class Test {
 		
 		StringTokenizer input = new StringTokenizer(Files.readString(Path.of(fileName)));
 		while(input.hasMoreTokens()) {
+			count++;
+			if((count/50000) == 1 ){
+				System.out.print(".");
+				count = 0;
+			}
 		   String word = input.nextToken();
-//		   System.out.println(word);
 		   NR1++;
 		   if(cache1.getObject(word) == null) { // if NULL, missed cache1
-//			   System.out.println("Cache1 - " + cache1.toString());
 			   if(cache2 != null) {
 				   NR2++;
 				   if(cache2.getObject(word) == null) { // if NULL, missed cache2
 					   cache2.addObject(word);
 					   cache1.addObject(word);
-//					   System.out.println("Cache2 - " + cache2.toString());
-//					   System.out.println("Cache1 - " + cache1.toString() + "\n");
 				   }else {
-//					   System.out.println("Removing c2 " + word);
 					   NH2++;
 					   hold = cache2.getObject(word);
 					   cache2.removeObject(hold);
 					   cache2.addObject(hold);
 					   cache1.addObject(hold);
-//					   System.out.println("Cache2 - " + cache1.toString());
 				   }
 			   }
 			   else {
@@ -58,11 +58,9 @@ public class Test {
 			   }
 		   }else { // if HIT, cache1
 			   NH1++;
-//			   System.out.println("Removing c1 " + word + "\n");
 			   hold = cache1.getObject(word);
 			   cache1.removeObject(hold);
 			   cache1.addObject(hold);
-//			   System.out.println("Cache1 - " + cache1.toString());
 			   if(cache2 != null) { // if HIT, cache2
 				   cache2.removeObject(hold);
 				   cache2.addObject(hold);
@@ -77,7 +75,7 @@ public class Test {
 		HR1 = ((double)NH1/NR);
 		HR2 = ((double)NH2/NR2);
 		
-		System.out.println("The number of global references: " + NR);
+		System.out.println("\nThe number of global references: " + NR);
 		System.out.println("The number of global cache hits: " + NH);
 		System.out.println("The global hit ration: \t\t " + String.format("%.10f", HR) + "\n");
 		
