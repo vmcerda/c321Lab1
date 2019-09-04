@@ -4,12 +4,10 @@ public class Cache<E> {
 	private LinkedList<E> cache;
 	private int cacheSize;
 	
-	public Cache(){
+	public Cache(int size){
 		this.cache = new LinkedList<E>();
+		cacheSize = size;
 
-	}
-	public void setCachSize(int i) {  //pass in as a parameter to constructor
-		cacheSize = i;
 	}
 	
 	public E getObject(E data) {

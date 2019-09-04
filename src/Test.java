@@ -19,16 +19,14 @@ public class Test {
 		//Check arguments//
 		usage(args);
 
-		cache1 = new Cache<>();	//Create cache tree size(1 or 2)//
-		cache1.setCachSize(Integer.parseInt(args[2])) ;	//sets 1st cache size
+		cache1 = new Cache<>(Integer.parseInt(args[1]));	//Create cache tree size(1 or 2)//
 		System.out.println("First level cache with " + cache1.length() + " entries has been created");
-		if(args[1].equals("2")) {	//if cache size is 2 add a second cache and file is in index 4//
-			cache2 = new Cache<>();
-			cache2.setCachSize(Integer.parseInt(args[3]));
-			fileName = args[4];
+		if(args[0].equals("2")) {	//if cache size is 2 add a second cache and file is in index 4//
+			cache2 = new Cache<>(Integer.parseInt(args[2]));
+			fileName = args[3];
 			System.out.println("Second level cache with " + cache2.length() + " entries has been created");
 		}else {
-			fileName = args[3];		//If a single cache, file is in index 3
+			fileName = args[2];		//If a single cache, file is in index 3
 		}
 		
 		StringTokenizer input = new StringTokenizer(Files.readString(Path.of(fileName)));
@@ -107,13 +105,13 @@ public class Test {
 			System.exit(0);
 		}
 		
-		int arg1Value = Integer.parseInt(args[1]);
+		int arg1Value = Integer.parseInt(args[0]);
 		
 		if(args.length < 4 || args.length > 5) {
 			System.out.println(statement);
 			System.exit(0);
 		}
-		if(arg1Value == 2 && (Integer.parseInt(args[2]) > Integer.parseInt(args[3]))) {
+		if(arg1Value == 2 && (Integer.parseInt(args[1]) > Integer.parseInt(args[2]))) {
 			System.out.println(statement);
 			System.exit(0);
 		}
@@ -121,11 +119,11 @@ public class Test {
 			System.out.println(statement);
 			System.exit(0);
 		}
-		if(arg1Value == 1 && args.length != 4) {
+		if(arg1Value == 1 && args.length != 3) {
 			System.out.println(statement);
 			System.exit(0);
 		}
-		if(arg1Value == 2 && args.length != 5) {
+		if(arg1Value == 2 && args.length != 4) {
 			System.out.println(statement);
 			System.exit(0);
 		}
