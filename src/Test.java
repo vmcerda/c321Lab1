@@ -1,5 +1,9 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 
 public class Test {
@@ -27,9 +31,9 @@ public class Test {
 			fileName = args[3];		//If a single cache, file is in index 3
 		}
 		
-		Scanner input = new Scanner(new FileReader(fileName));
-		while(input.hasNext()) {
-		   String word = input.next();
+		StringTokenizer input = new StringTokenizer(Files.readString(Path.of(fileName)));
+		while(input.hasMoreTokens()) {
+		   String word = input.nextToken();
 //		   System.out.println(word);
 		   NR1++;
 		   if(cache1.getObject(word) == null) { // if NULL, missed cache1
